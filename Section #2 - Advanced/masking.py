@@ -3,6 +3,10 @@
 import cv2 as cv
 import numpy as np
 
+import os
+import sys
+os.chdir(os.path.split(sys.argv[0])[0])
+
 img = cv.imread('../Resources/Photos/cats 2.jpg')
 cv.imshow('Cats', img)
 
@@ -16,7 +20,11 @@ rectangle = cv.rectangle(blank.copy(), (30,30), (370,370), 255, -1)
 weird_shape = cv.bitwise_and(circle,rectangle)
 cv.imshow('Weird Shape', weird_shape)
 
+masked = cv.bitwise_not(img,img)
+cv.imshow('Weird Shaped Masked Image bitwise_not', masked)
+
 masked = cv.bitwise_and(img,img,mask=weird_shape)
 cv.imshow('Weird Shaped Masked Image', masked)
 
 cv.waitKey(0)
+cv.destroyAllWindows()
